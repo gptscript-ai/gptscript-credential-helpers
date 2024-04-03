@@ -3,8 +3,8 @@
 package main
 
 import (
-	"github.com/docker/docker-credential-helpers/credentials"
-	"github.com/docker/docker-credential-helpers/secretservice"
+	"github.com/gptscript-ai/gptscript-credential-helpers/credentials"
+	"github.com/gptscript-ai/gptscript-credential-helpers/secretservice"
 )
 
 func main() {

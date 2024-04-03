@@ -9,6 +9,9 @@ case $1 in
 	"revision")
 		echo "$(git rev-parse HEAD)$(if ! git diff --no-ext-diff --quiet --exit-code; then echo .m; fi)"
 		;;
+	"commit-date")
+		git show -s --format=%cI HEAD
+		;;
 	*)
 		echo "usage: ./hack/git-meta <version|revision>"
 		exit 1

@@ -1,4 +1,4 @@
-module github.com/docker/docker-credential-helpers
+module github.com/gptscript-ai/gptscript-credential-helpers
 
 go 1.19
 

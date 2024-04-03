@@ -14,7 +14,7 @@ import (
 	"errors"
 	"unsafe"
 
-	"github.com/docker/docker-credential-helpers/credentials"
+	"github.com/gptscript-ai/gptscript-credential-helpers/credentials"
 )
 
 // Secretservice handles secrets using Linux secret-service as a store.

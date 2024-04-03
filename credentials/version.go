@@ -5,7 +5,7 @@ var (
 	Name = ""
 
 	// Package is filled at linking time
-	Package = "github.com/docker/docker-credential-helpers"
+	Package = "github.com/gptscript-ai/gptscript-credential-helpers"
 
 	// Version holds the complete version number. Filled in at linking time.
 	Version = "v0.0.0+unknown"

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/docker/docker-credential-helpers/credentials"
-	"github.com/docker/docker-credential-helpers/pass"
+	"github.com/gptscript-ai/gptscript-credential-helpers/credentials"
+	"github.com/gptscript-ai/gptscript-credential-helpers/pass"
 )
 
 func main() {

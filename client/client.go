@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/docker/docker-credential-helpers/credentials"
+	"github.com/gptscript-ai/gptscript-credential-helpers/credentials"
 )
 
 // isValidCredsMessage checks if 'msg' contains invalid credentials error message.

@@ -22,11 +22,11 @@ if [ -n "$CACHE_TO" ]; then
 	done
 fi
 
-dockerpfx=$(mktemp -t dockercredhelper-pfx.XXXXXXXXXX)
-function clean {
-	rm -f "$dockerpfx"
-}
-trap clean EXIT
+#dockerpfx=$(mktemp -t dockercredhelper-pfx.XXXXXXXXXX)
+#function clean {
+#	rm -f "$dockerpfx"
+#}
+#trap clean EXIT
 
 # release
 (
@@ -39,21 +39,30 @@ mv -f ./${DESTDIR}/**/* ./${DESTDIR}/
 find ./${DESTDIR} -type d -empty -delete
 
 # sign binaries
-if [ -n "$SIGN" ]; then
-	for f in "${DESTDIR}"/*".darwin-"*; do
-		SIGNINGHASH=$(security find-identity -v -p codesigning | grep "Developer ID Application: Docker Inc" | cut -d ' ' -f 4)
-		xcrun -log codesign -s "$SIGNINGHASH" --force --verbose "$f"
-		xcrun codesign --verify --deep --strict --verbose=2 --display "$f"
-	done
-	for f in "${DESTDIR}"/*".windows-"*; do
-		echo ${PFX} | base64 -d > "$dockerpfx"
-		signtool sign /fd SHA256 /a /f pfx /p ${PFXPASSWORD} /d Docker /du https://www.docker.com /t http://timestamp.verisign.com/scripts/timestamp.dll "$f"
-	done
-fi
+#if [ -n "$SIGN" ]; then
+#	for f in "${DESTDIR}"/*".darwin-"*; do
+#		SIGNINGHASH=$(security find-identity -v -p codesigning | grep "Developer ID Application: Docker Inc" | cut -d ' ' -f 4)
+#		xcrun -log codesign -s "$SIGNINGHASH" --force --verbose "$f"
+#		xcrun codesign --verify --deep --strict --verbose=2 --display "$f"
+#	done
+#	for f in "${DESTDIR}"/*".windows-"*; do
+#		echo ${PFX} | base64 -d > "$dockerpfx"
+#		signtool sign /fd SHA256 /a /f pfx /p ${PFXPASSWORD} /d Docker /du https://www.docker.com /t http://timestamp.verisign.com/scripts/timestamp.dll "$f"
+#	done
+#fi
+
+# universal binary
+(
+  cd ${DESTDIR}
+  wget https://github.com/g-linville/makefat/releases/download/v0.1.2/makefat_0.1.2_linux_amd64.tar.gz
+  tar -xzf makefat_0.1.2_linux_amd64.tar.gz
+  find . -name "gptscript-credential-osxkeychain-*" -print0 | xargs ./makefat gptscript-credential-osxkeychain
+  rm -f makefat* gptscript-credential-osxkeychain-*
+)
 
 # checksums
 (
   cd ${DESTDIR}
-  sha256sum -b docker-credential-* > ./checksums.txt
+  sha256sum -b gptscript-credential-* > ./checksums.txt
   sha256sum -c --strict checksums.txt
 )

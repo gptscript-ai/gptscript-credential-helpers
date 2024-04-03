@@ -47,10 +47,10 @@ func (c *Credentials) isValid() (bool, error) {
 	return true, nil
 }
 
-// CredsLabel holds the way Docker credentials should be labeled as such in credentials stores that allow labelling.
-// That label allows to filter out non-Docker credentials too at lookup/search in macOS keychain,
-// Windows credentials manager and Linux libsecret. Default value is "Docker Credentials"
-var CredsLabel = "Docker Credentials"
+// CredsLabel holds the way GPTScript credentials should be labeled as such in credentials stores that allow labelling.
+// That label allows to filter out non-GPTScript credentials too at lookup/search in macOS keychain,
+// Windows credentials manager and Linux libsecret. Default value is "GPTScript Credentials"
+var CredsLabel = "GPTScript Credentials"
 
 // SetCredsLabel is a simple setter for CredsLabel
 func SetCredsLabel(label string) {

@@ -6,7 +6,7 @@ ARG OSXCROSS_VERSION=11.3-r7-debian
 ARG GOLANGCI_LINT_VERSION=v1.55.2
 ARG DEBIAN_FRONTEND=noninteractive
 
-ARG PACKAGE=github.com/docker/docker-credential-helpers
+ARG PACKAGE=github.com/gptscript-ai/gptscript-credential-helpers
 
 # xx is a helper for cross-compilation
 FROM --platform=$BUILDPLATFORM tonistiigi/xx:${XX_VERSION} AS xx
@@ -107,8 +107,8 @@ RUN --mount=type=bind,target=. \
   set -ex
   xx-go --wrap
   make build-pass build-secretservice PACKAGE=$PACKAGE VERSION=$(cat /tmp/.version) REVISION=$(cat /tmp/.revision) DESTDIR=/out
-  xx-verify /out/docker-credential-pass
-  xx-verify /out/docker-credential-secretservice
+  xx-verify /out/gptscript-credential-pass
+  xx-verify /out/gptscript-credential-secretservice
 EOT
 
 FROM base AS build-darwin
@@ -124,8 +124,8 @@ RUN --mount=type=bind,target=. \
   xx-go --wrap
   go install std
   make build-osxkeychain build-pass PACKAGE=$PACKAGE VERSION=$(cat /tmp/.version) REVISION=$(cat /tmp/.revision) DESTDIR=/out
-  xx-verify /out/docker-credential-osxkeychain
-  xx-verify /out/docker-credential-pass
+  xx-verify /out/gptscript-credential-osxkeychain
+  xx-verify /out/gptscript-credential-pass
 EOT
 
 FROM base AS build-windows
@@ -138,8 +138,8 @@ RUN --mount=type=bind,target=. \
   set -ex
   xx-go --wrap
   make build-wincred PACKAGE=$PACKAGE VERSION=$(cat /tmp/.version) REVISION=$(cat /tmp/.revision) DESTDIR=/out
-  mv /out/docker-credential-wincred /out/docker-credential-wincred.exe
-  xx-verify /out/docker-credential-wincred.exe
+  mv /out/gptscript-credential-wincred /out/gptscript-credential-wincred.exe
+  xx-verify /out/gptscript-credential-wincred.exe
 EOT
 
 FROM build-$TARGETOS AS build

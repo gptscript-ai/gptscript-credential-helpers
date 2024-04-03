@@ -1,9 +1,10 @@
-PACKAGE ?= github.com/docker/docker-credential-helpers
+PACKAGE ?= github.com/gptscript-ai/gptscript-credential-helpers
 VERSION ?= $(shell ./hack/git-meta version)
 REVISION ?= $(shell ./hack/git-meta revision)
+COMMIT_DATE ?= $(shell .hack/git-meta commit-date)
 
-GO_PKG = github.com/docker/docker-credential-helpers
-GO_LDFLAGS = -s -w -X ${GO_PKG}/credentials.Version=${VERSION} -X ${GO_PKG}/credentials.Revision=${REVISION} -X ${GO_PKG}/credentials.Package=${PACKAGE}
+GO_PKG = github.com/gptscript-ai/gptscript-credential-helpers
+GO_LDFLAGS = -s -w -X ${GO_PKG}/credentials.Version=${VERSION} -X ${GO_PKG}/credentials.Revision=${REVISION} -X ${GO_PKG}/credentials.Package=${PACKAGE} -X main.version=${VERSION} -X main.commit=${REVISION} -X main.date=${COMMIT_DATE}
 
 BUILDX_CMD ?= docker buildx
 DESTDIR ?= ./bin/build
@@ -24,7 +25,7 @@ clean:
 
 .PHONY: build-%
 build-%: # build, can be one of build-osxkeychain build-pass build-secretservice build-wincred
-	go build -trimpath -ldflags="$(GO_LDFLAGS) -X ${GO_PKG}/credentials.Name=docker-credential-$*" -o "$(DESTDIR)/docker-credential-$*" ./$*/cmd/
+	go build -trimpath -ldflags="$(GO_LDFLAGS) -X ${GO_PKG}/credentials.Name=gptscript-credential-$*" -o "$(DESTDIR)/gptscript-credential-$*" ./$*/cmd/
 
 # aliases for build-* targets
 .PHONY: osxkeychain secretservice pass wincred
@@ -62,7 +63,7 @@ fmt:
 .PHONY: validate
 validate: lint validate-vendor fmt
 
-BUILDIMG:=docker-credential-secretservice-$(VERSION)
+BUILDIMG:=gptscript-credential-secretservice-$(VERSION)
 .PHONY: deb
 deb:
 	mkdir -p release

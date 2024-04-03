@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/docker/docker-credential-helpers/credentials"
+	"github.com/gptscript-ai/gptscript-credential-helpers/credentials"
 )
 
 const (
