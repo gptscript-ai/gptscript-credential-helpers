@@ -1,7 +1,7 @@
 PACKAGE ?= github.com/gptscript-ai/gptscript-credential-helpers
 VERSION ?= $(shell ./hack/git-meta version)
 REVISION ?= $(shell ./hack/git-meta revision)
-COMMIT_DATE ?= $(shell .hack/git-meta commit-date)
+COMMIT_DATE ?= $(shell ./hack/git-meta commit-date)
 
 GO_PKG = github.com/gptscript-ai/gptscript-credential-helpers
 GO_LDFLAGS = -s -w -X ${GO_PKG}/credentials.Version=${VERSION} -X ${GO_PKG}/credentials.Revision=${REVISION} -X ${GO_PKG}/credentials.Package=${PACKAGE} -X main.version=${VERSION} -X main.commit=${REVISION} -X main.date=${COMMIT_DATE}

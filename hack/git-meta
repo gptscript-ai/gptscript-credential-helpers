@@ -13,7 +13,7 @@ case $1 in
 		git show -s --format=%cI HEAD
 		;;
 	*)
-		echo "usage: ./hack/git-meta <version|revision>"
+		echo "usage: ./hack/git-meta <version|revision|commit-date>"
 		exit 1
 		;;
 esac
