@@ -113,7 +113,14 @@ jobs:
         uses: actions/download-artifact@v4
       - run: ls -lR
       - name: Create Release
-        uses: softprops/action-gh-release@69320dbe05506a9a39fc8ae11030b214ec2d1f87
+        uses: ncipollo/release-action@v1
         with:
-          draft: true
-          files: gptscript-credential-helpers*/*
+          allowUpdates: true
+          artifactErrorsFailBuild: true
+          artifacts: |
+            ./*
+          makeLatest: ${{ !contains(github.ref_name, '-rc') }}
+          generateReleaseNotes: true
+          prerelease: ${{ contains(github.ref_name, '-rc') }}
+          replacesArtifacts: true
+          token: ${{ secrets.GITHUB_TOKEN }}
