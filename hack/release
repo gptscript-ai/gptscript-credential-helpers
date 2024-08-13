@@ -51,15 +51,6 @@ find ./${DESTDIR} -type d -empty -delete
 #	done
 #fi
 
-# universal binary
-(
-  cd ${DESTDIR}
-  wget https://github.com/g-linville/makefat/releases/download/v0.1.2/makefat_0.1.2_linux_amd64.tar.gz
-  tar -xzf makefat_0.1.2_linux_amd64.tar.gz
-  find . -name "gptscript-credential-osxkeychain-*" -print0 | xargs ./makefat gptscript-credential-osxkeychain
-  rm -f makefat* gptscript-credential-osxkeychain-*
-)
-
 # checksums
 (
   cd ${DESTDIR}
