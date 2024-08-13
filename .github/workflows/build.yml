@@ -114,7 +114,7 @@ jobs:
       - run: ls -lR
       - run: |
           pushd ./gptscript-credential-helpers-windows
-          sha256sum -b gptscript-credential-wincred.exe >> ./checksums.txt
+          sha256sum -b gptscript-credential-wincred.exe >> ../gptscript-credential-helpers/checksums.txt
           popd
       - name: Create Release
         uses: ncipollo/release-action@v1
