@@ -62,6 +62,8 @@ jobs:
       -
         name: Rename and list artifacts
         run: |
+          mv ./bin/gptscript-credential-osxkeychain*darwin-amd64 ./bin/gptscript-credential-osxkeychain-darwin-amd64
+          mv ./bin/gptscript-credential-osxkeychain*darwin-arm64 ./bin/gptscript-credential-osxkeychain-darwin-arm64
           mv ./bin/gptscript-credential-pass*darwin-amd64 ./bin/gptscript-credential-pass-darwin-amd64
           mv ./bin/gptscript-credential-pass*darwin-arm64 ./bin/gptscript-credential-pass-darwin-arm64
           mv ./bin/gptscript-credential-pass*linux-amd64 ./bin/gptscript-credential-pass-linux-amd64
