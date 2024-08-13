@@ -60,16 +60,8 @@ jobs:
           CACHE_FROM: type=gha,scope=build
           CACHE_TO: type=gha,scope=build,mode=max
       -
-        name: Rename and list artifacts
+        name: List artifacts
         run: |
-          mv ./bin/gptscript-credential-osxkeychain*darwin-amd64 ./bin/gptscript-credential-osxkeychain-darwin-amd64
-          mv ./bin/gptscript-credential-osxkeychain*darwin-arm64 ./bin/gptscript-credential-osxkeychain-darwin-arm64
-          mv ./bin/gptscript-credential-pass*darwin-amd64 ./bin/gptscript-credential-pass-darwin-amd64
-          mv ./bin/gptscript-credential-pass*darwin-arm64 ./bin/gptscript-credential-pass-darwin-arm64
-          mv ./bin/gptscript-credential-pass*linux-amd64 ./bin/gptscript-credential-pass-linux-amd64
-          mv ./bin/gptscript-credential-pass*linux-arm64 ./bin/gptscript-credential-pass-linux-arm64
-          mv ./bin/gptscript-credential-secretservice*linux-amd64 ./bin/gptscript-credential-secretservice-linux-amd64
-          mv ./bin/gptscript-credential-secretservice*linux-arm64 ./bin/gptscript-credential-secretservice-linux-arm64
           tree -nh ${{ env.DESTDIR }}
       -
         name: Check artifacts

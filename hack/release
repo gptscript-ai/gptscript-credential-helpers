@@ -51,9 +51,19 @@ find ./${DESTDIR} -type d -empty -delete
 #	done
 #fi
 
-# checksums
+# Rename everything to remove the tag from the name, and generate checksums
 (
   cd ${DESTDIR}
+
+  mv gptscript-credential-osxkeychain*darwin-amd64 gptscript-credential-osxkeychain-darwin-amd64
+  mv gptscript-credential-osxkeychain*darwin-arm64 gptscript-credential-osxkeychain-darwin-arm64
+  mv gptscript-credential-pass*darwin-amd64 gptscript-credential-pass-darwin-amd64
+  mv gptscript-credential-pass*darwin-arm64 gptscript-credential-pass-darwin-arm64
+  mv gptscript-credential-pass*linux-amd64 gptscript-credential-pass-linux-amd64
+  mv gptscript-credential-pass*linux-arm64 gptscript-credential-pass-linux-arm64
+  mv gptscript-credential-secretservice*linux-amd64 gptscript-credential-secretservice-linux-amd64
+  mv gptscript-credential-secretservice*linux-arm64 gptscript-credential-secretservice-linux-arm64
+  
   sha256sum -b gptscript-credential-* > ./checksums.txt
   sha256sum -c --strict checksums.txt
 )
